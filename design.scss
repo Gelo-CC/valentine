@@ -1,0 +1,256 @@
+$vanilla: #f0e4d0;
+$chocolate: #f4ba79;
+
+/* Dark room background with ambient light */
+body {
+    background: linear-gradient(180deg, #111 50%, #333 100%);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+/* Subtle lighting effect in the room */
+.room-light {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.9));
+    border-radius: 50%;
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.3);
+    z-index: -1;
+}
+
+@mixin foodColoring($color) {
+    background-color: $color;
+    box-shadow:
+        0 2px 0px lighten($color, 5%),
+        0 4px 0px darken($color, 8.2%),
+        0 6px 0px darken($color, 8.4%),
+        0 8px 0px darken($color, 8.6%),
+        0 10px 0px darken($color, 8.8%),
+        0 12px 0px darken($color, 9%),
+        0 14px 0px darken($color, 9.2%),
+        0 16px 0px darken($color, 9.4%),
+        0 18px 0px darken($color, 9.6%),
+        0 20px 0px darken($color, 9.8%),
+        0 22px 0px darken($color, 10%),
+        0 24px 0px darken($color, 10.2%),
+        0 26px 0px darken($color, 10.4%),
+        0 28px 0px darken($color, 10.6%),
+        0 30px 0px darken($color, 10.8%);
+}
+
+.cake {
+    position: absolute;
+    width: 250px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-top: -70px;
+    margin-left: -125px;
+}
+
+.plate {
+    width: 270px;
+    height: 110px;
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    box-shadow:
+        0 2px 0 darken(#ccc, 10%),
+        0 4px 0 darken(#ccc, 10%),
+        0 5px 40px rgba(black, 0.5);
+}
+
+.cake > * {
+    position: absolute;
+}
+
+.layer {
+    position: absolute;
+    display: block;
+    width: 250px;
+    height: 100px;
+    border-radius: 50%;
+    @include foodColoring($chocolate);
+}
+
+.layer-top { top: 0px; }
+.layer-middle { top: 33px; }
+.layer-bottom { top: 66px; }
+
+.icing {
+    top: 2px;
+    left: 5px;
+    background-color: $vanilla;
+    width: 240px;
+    height: 90px;
+    border-radius: 50%;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        right: 5px;
+        bottom: 6px;
+        left: 5px;
+        background-color: lighten($vanilla, 3%);
+        box-shadow:
+            0 0 4px lighten($vanilla, 5%),
+            0 0 4px lighten($vanilla, 5%),
+            0 0 4px lighten($vanilla, 5%);
+        border-radius: 50%;
+        z-index: 1;
+    }
+}
+
+.drip {
+    display: block;
+    width: 50px;
+    height: 60px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: $vanilla;
+}
+
+.drip1 {
+    top: 53px;
+    left: 5px;
+    transform: skewY(15deg);
+    height: 48px;
+    width: 40px;
+}
+
+.drip2 {
+    top: 69px;
+    left: 181px;
+    transform: skewY(-15deg);
+}
+
+.drip3 {
+    top: 54px;
+    left: 90px;
+    width: 80px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.candle {
+    background-color: #ff8000;
+    width: 16px;
+    height: 50px;
+    border-radius: 8px / 4px;
+    top: -20px;
+    left: 50%;
+    margin-left: -8px;
+    z-index: 10;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 16px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: lighten(#ff6200, 10%);
+    }
+}
+
+.flame {
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 0, 0.8)); /* Gradient for depth */
+    width: 15px;
+    height: 35px;
+    border-radius: 10px 10px 10px 10px / 25px 25px 10px 10px;
+    top: -34px;
+    left: 50%;
+    margin-left: -7.5px;
+    z-index: 10;
+    
+    /* More visible shadows with stronger colors */
+    box-shadow:
+        0 0 25px rgba(255, 100, 0, 0.8),     /* Strong orange shadow */
+        0 0 50px rgba(246, 255, 0, 0.8),     /* Bright yellow-orange shadow */
+        0 0 100px rgba(255, 180, 100, 0.8),  /* Larger yellow-orange glow */
+        0 0 150px rgba(255, 100, 0, 0.5),    /* Soft light with a deep orange shadow */
+        0 0 200px rgba(255, 50, 0, 0.6),     /* Extended red shadow for a more visible glow */
+        0 0 250px rgba(255, 20, 0, 0.4);     /* Wide red shadow with higher contrast */
+
+    transform-origin: 50% 90%;
+    animation: flicker 1s ease-in-out alternate infinite;
+    
+    /* Slight animation to give flame movement */
+    transform: scale(1) translateZ(0) rotate(5deg);
+    animation: flicker 1s ease-in-out infinite;
+}
+
+/* Adding a subtle flicker effect */
+@keyframes flicker {
+    0% {
+        transform: scale(1) rotate(5deg);
+        box-shadow: 
+            0 0 25px rgba(255, 100, 0, 0.8),
+            0 0 50px rgba(255, 140, 0, 0.8),
+            0 0 100px rgba(255, 180, 100, 0.8),
+            0 0 150px rgba(255, 100, 0, 0.5),
+            0 0 200px rgba(255, 50, 0, 0.6);
+    }
+    25% {
+        transform: scale(1.05) rotate(-5deg);
+        box-shadow: 
+            0 0 30px rgba(255, 120, 0, 0.9),
+            0 0 60px rgba(255, 160, 0, 0.9),
+            0 0 120px rgba(255, 200, 0, 0.8),
+            0 0 180px rgba(255, 120, 0, 0.5),
+            0 0 250px rgba(255, 80, 0, 0.7);
+    }
+    50% {
+        transform: scale(1.1) rotate(10deg);
+        box-shadow: 
+            0 0 40px rgba(255, 140, 0, 0.9),
+            0 0 80px rgba(255, 180, 50, 0.8),
+            0 0 150px rgba(255, 200, 50, 0.7),
+            0 0 200px rgba(255, 140, 0, 0.6),
+            0 0 300px rgba(255, 100, 0, 0.5);
+    }
+    75% {
+        transform: scale(1.05) rotate(-10deg);
+        box-shadow: 
+            0 0 50px rgba(255, 160, 0, 0.9),
+            0 0 90px rgba(255, 200, 50, 0.9),
+            0 0 170px rgba(255, 220, 80, 0.8),
+            0 0 250px rgba(255, 160, 0, 0.6),
+            0 0 350px rgba(255, 120, 0, 0.5);
+    }
+    100% {
+        transform: scale(1) rotate(5deg);
+        box-shadow: 
+            0 0 25px rgba(255, 100, 0, 0.8),
+            0 0 50px rgba(255, 140, 0, 0.8),
+            0 0 100px rgba(255, 180, 100, 0.8),
+            0 0 150px rgba(255, 100, 0, 0.5),
+            0 0 200px rgba(255, 50, 0, 0.6);
+    }
+}
+
+
+button {
+    background-color: #f0e4d0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e0d4c0;
+}
