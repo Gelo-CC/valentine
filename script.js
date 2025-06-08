@@ -123,7 +123,7 @@ const flame = document.querySelector('.flame');
           analyser.getByteFrequencyData(dataArray);
           const volume = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length;
 
-          if (volume > 20 && flame.style.opacity !== '0') {
+          if (volume > 40 && flame.style.opacity !== '0') {
             blowOutCandle();
             createFireworks();
           }
